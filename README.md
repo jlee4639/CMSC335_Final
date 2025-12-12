@@ -1,7 +1,7 @@
-Submitted by: 
-Group Members: Jayden Lee (jlee4639)
-App Description: Allows users to easily find weather for their preferred locations
-YouTube Video Link: https://www.youtube.com/MyAmazingAPP
-APIs: Weatherstack (https://weatherstack.com/?utm_source=Github&utm_medium=Referral&utm_campaign=Public-apis-repo-Best-sellers)
-Contact Email:  superterp@notreal.address.what
-Deployed App Link: https://notreal.what.terpNel/myApp
+Submitted by: <br>
+Group Members: Jayden Lee (jlee4639), Ryan Zhong ()<br>
+App Description: Allows users to receive random jokes and save their favorite ones <br>
+YouTube Video Link: <br>
+APIs: Official Joke API (https://github.com/15Dkatz/official_joke_api?tab=readme-ov-file) <br>
+Contact Email:  jlee4639@terpmail.umd.edu or rzhong89@gmail.com<br>
+Deployed App Link: 

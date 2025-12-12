@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="container">
+        <h1>Joke Generator</h1>
+
+        <form action="<%- userJokesUrl %>" method="post" id="userInputForm">
+            <div class="formItem">
+                <label><strong>Name: </strong> <input type="text" name="name"></label>
+            </div>
+            <div class="formItem">
+                <label for="jokeType"><strong>Joke Type(s): </strong></label><br>
+            </div>
+
+            <div id="checkbox" class="formItem">
+                <label> General<input type="checkbox" name="general" value="general"></label>
+                <label> Knock-knock<input type="checkbox" name="knock-knock" value="knock-knock"></label>
+                <label> Programming<input type="checkbox" name="programming" value="programming"></label>
+                <label> Dad<input type="checkbox" name="dad" value="dad"></label>
+            </div>
+
+            <div class="formItem">
+                <label for="numJokes">
+                    <strong>Number of Jokes: </strong> 
+                    <input type="number" id="numJokes" min="1" max="10" value="1">
+                </label>
+            </div>
+
+            <div class="formItem">
+                <input type="reset" value="Reset Form">
+                <input type="submit" value="Submit Form">
+            </div>
+        </form>
+    </div>
+</body>
+</html>
