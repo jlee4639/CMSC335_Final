@@ -1,28 +1,31 @@
-// Imports
-const path = require("path");
-const express = require("express");
+// imports
+const express = require('express');
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const path = require('path');
+require('dotenv').config();
+
 const app = express();
-const portNum = 5000;
+const portNum = 8080;
 
-async function main(){
-    // Code for express app
-    // Parse data from user form submission
-    app.use(express.urlencoded({extended: true}));
-    // Be able to parse MongoDB API and Joke API data
-    app.use(express.json());
-    // Add static files
-    app.use(express.static(path.join(__dirname, "public")));
+const uri = process.env.MONGO_CONNECTION_STRING;
 
-    // Set template views
-    app.set("view engine", "ejs");
-    app.set("views", path.resolve(__dirname, "templates"));
+mongoose.connect(uri);
 
-    // Display homepage
-    app.get("/", (request, response) => {
-        response.render("homepage");
-    });
+app.set('views', path.join(__dirname, 'templates'));
+app.set('view engine', 'ejs');
+app.use(express.static(path.join(__dirname, 'public')));
 
-    app.listen(portNum);
-}
+app.use(bodyParser.urlencoded({ extended: true }));
 
-main();
+const apiRoutes = require('./routes/apiRoutes');
+const dbRoutes = require('./routes/dbRoutes');
+
+app.use('/', apiRoutes);
+
+app.use('/db', dbRoutes);
+
+
+app.listen(portNum, () => {
+    console.log(`Server running on http://localhost:${portNum}`);
+});

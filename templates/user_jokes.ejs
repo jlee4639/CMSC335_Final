@@ -3,14 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favorite Jokes</title>
     <link rel="stylesheet" href="/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
-    <title>User Jokes</title>
 </head>
 <body>
-    <h1><%- userName %>'s Favorite Jokes</h1>
-    <%- userJokesTable->
+    <div id="container">
+        <h1>Your Favorite Jokes</h1>
+
+        <% if (jokes.length === 0) { %>
+            <p>No favorite jokes saved yet.</p>
+        <% } else { %>
+            <table border="1">
+                <tr>
+                    <th>Type</th>
+                    <th>Setup</th>
+                    <th>Punchline</th>
+                </tr>
+                <% jokes.forEach(joke => { %>
+                    <tr>
+                        <td><%= joke.type %></td>
+                        <td><%= joke.setup %></td>
+                        <td><%= joke.punchline %></td>
+                    </tr>
+                <% }); %>
+            </table>
+        <% } %>
+
+        <br>
+        <form action="/db/clear" method="post" style="display: inline;">
+            <button type="submit">Clear All Favorites</button>
+        </form>
+        <a href="/"><button type="button">Back to Home</button></a>
+    </div>
 </body>
 </html>

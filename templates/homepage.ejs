@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Homepage</title>
+    <title>The Joke Vault</title>
     <link rel="stylesheet" href="/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,35 +11,48 @@
 </head>
 <body>
     <div id="container">
-        <h1>Joke Generator</h1>
+        <h1>The Joke Vault</h1>
 
-        <form action="<%- userJokesUrl %>" method="post" id="userInputForm">
-            <div class="formItem">
-                <label><strong>Name: </strong> <input type="text" name="name"></label>
-            </div>
-            <div class="formItem">
-                <label for="jokeType"><strong>Joke Type(s): </strong></label><br>
-            </div>
+        <nav>
+            <a href="/db/favorites">View Favorite Jokes</a>
+        </nav>
 
-            <div id="checkbox" class="formItem">
-                <label> General<input type="checkbox" name="general" value="general"></label>
-                <label> Knock-knock<input type="checkbox" name="knock-knock" value="knock-knock"></label>
-                <label> Programming<input type="checkbox" name="programming" value="programming"></label>
-                <label> Dad<input type="checkbox" name="dad" value="dad"></label>
-            </div>
-
+        <form action="/get-jokes" method="get" id="jokeForm">
             <div class="formItem">
-                <label for="numJokes">
-                    <strong>Number of Jokes: </strong> 
-                    <input type="number" id="numJokes" min="1" max="10" value="1">
-                </label>
+                <label for="type"><strong>Select Joke Category: </strong></label>
+                <select name="type" id="type">
+                    <option value="random">Random</option>
+                    <option value="general">General</option>
+                    <option value="knock-knock">Knock-knock</option>
+                    <option value="programming">Programming</option>
+                    <option value="dad">Dad</option>
+                </select>
             </div>
 
             <div class="formItem">
                 <input type="reset" value="Reset Form">
-                <input type="submit" value="Submit Form">
+                <input type="submit" value="Get Joke">
             </div>
         </form>
+
+        <% if (joke) { %>
+            <hr>
+            <h2>Your Joke:</h2>
+            <div class="joke-card">
+                <p><strong>Type:</strong> <%= joke.type %></p>
+                <p><strong>Setup:</strong> <%= joke.setup %></p>
+                <p><strong>Punchline:</strong> <%= joke.punchline %></p>
+
+                <form action="/db/save" method="post" style="display: inline;">
+                    <input type="hidden" name="setup" value="<%= joke.setup %>">
+                    <input type="hidden" name="punchline" value="<%= joke.punchline %>">
+                    <input type="hidden" name="type" value="<%= joke.type %>">
+                    <button type="submit">Add to Favorites</button>
+                </form>
+            </div>
+        <% } else if (error) { %>
+            <p style="color: red;"><%= error %></p>
+        <% } %>
     </div>
 </body>
 </html>
